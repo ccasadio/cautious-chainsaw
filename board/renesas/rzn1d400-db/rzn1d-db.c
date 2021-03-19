@@ -46,47 +46,7 @@ int board_early_init_f(void)
 void rzn1_setup_pinmux(void)
 {
 	/* Set pin mux and drive stength for pins used by U-Boot */
-	rzn1_board_pinmux(RZN1_P_UART0);
-
-#if defined(RZN1_ENABLE_QSPI)
-	rzn1_board_pinmux(RZN1_P_QSPI0);
-#endif
-
-#if defined(RZN1_ENABLE_GPIO)
-	rzn1_board_pinmux(RZN1_P_GPIO1);
-	rzn1_board_pinmux(RZN1_P_GPIO2);
-#endif
-
-#if defined(RZN1_ENABLE_I2C)
-	rzn1_board_pinmux(RZN1_P_I2C1);
-#endif
-
-#if defined(RZN1_ENABLE_ETHERNET) && !defined(CONFIG_SPL_BUILD)
-	rzn1_board_pinmux(RZN1_P_REFCLK);
-	rzn1_board_pinmux(RZN1_P_ETH0);
-	rzn1_board_pinmux(RZN1_P_ETH1);
-	rzn1_board_pinmux(RZN1_P_ETH2);
-	rzn1_board_pinmux(RZN1_P_ETH3);
-	rzn1_board_pinmux(RZN1_P_ETH4);
-	rzn1_board_pinmux(RZN1_P_SWITCH);
-	rzn1_board_pinmux(RZN1_P_MDIO0);
-	rzn1_board_pinmux(RZN1_P_MDIO1);
-#endif
-
-#if defined(RZN1_ENABLE_SDHC) && !defined(CONFIG_SPL_BUILD)
-	rzn1_board_pinmux(RZN1_P_SDIO0);
-#endif
-
-#if defined(RZN1_ENABLE_USBH) && !defined(CONFIG_SPL_BUILD)
-	rzn1_board_pinmux(RZN1_P_USB);
-#endif
-
-	/*
-	 * This is special 'virtual' pins for the MDIO multiplexing.
-	 * The default sets MDIO1 control to the 5-port Switch, but U-Boot
-	 * doesn't have a driver for this, hence MDIO1 is controlled by GMAC1
-	 */
-	rzn1_pinmux_set(RZN1_MUX_MDIO(RZN1_MDIO_BUS1, MDIO_MUX_MAC1));
+	rzn1_board_pinmux(-1);
 }
 
 #if (defined(RZN1_ENABLE_USBF) || defined(RZN1_ENABLE_USBH)) && !defined(CONFIG_SPL_BUILD)
